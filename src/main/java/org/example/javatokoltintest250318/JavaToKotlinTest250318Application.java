@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaToKoltinTest250318Application {
+public class JavaToKotlinTest250318Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaToKoltinTest250318Application.class, args);
+		SpringApplication.run(JavaToKotlinTest250318Application.class, args);
 	}
 
 }
