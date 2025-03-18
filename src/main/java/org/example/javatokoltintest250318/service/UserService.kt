@@ -1,46 +1,40 @@
-package org.example.javatokoltintest250318.service;
+package org.example.javatokoltintest250318.service
 
-import java.util.Optional;
-
-import org.example.javatokoltintest250318.entity.User;
-import org.example.javatokoltintest250318.repository.UserRepository;
-import org.springframework.stereotype.Service;
+import org.example.javatokoltintest250318.entity.User
+import org.example.javatokoltintest250318.repository.UserRepository
+import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
-public class UserService {
+class UserService(
+    private val userRepository: UserRepository
+) {
+    // C
+    fun createUser(username: String, email: String): User {
+        val user = User()
+        user.username = username
+        user.email = email
 
-	private final UserRepository userRepository;
+        return userRepository.save(user)
+    }
 
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+    // R
+    fun getUser(id: Long): Optional<User> {
+        return userRepository.findById(id)
+    }
 
-	// C
-	public User createUser(String username, String email) {
-		User user = new User();
-		user.setUsername(username);
-		user.setEmail(email);
+    // U
+    fun updateUser(id: Long, updateUsername: String): User {
+        val user = userRepository.findById(id)
+            .orElseThrow { RuntimeException("User not found") }
 
-		return userRepository.save(user);
-	}
+        user.username = updateUsername
 
-	// R
-	public Optional<User> getUser(Long id) {
-		return userRepository.findById(id);
-	}
+        return userRepository.save(user)
+    }
 
-	// U
-	public User updateUser(Long id, String updateUsername) {
-		User user = userRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("User not found"));
-
-		user.setUsername(updateUsername);
-
-		return userRepository.save(user);
-	}
-
-	// D
-	public void deleteUser(Long id) {
-		userRepository.deleteById(id);
-	}
+    // D
+    fun deleteUser(id: Long) {
+        userRepository.deleteById(id)
+    }
 }
